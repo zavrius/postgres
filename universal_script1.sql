@@ -1,0 +1,27 @@
+rem Это комментарий
+
+CREATE TABLE IF NOT EXISTS EMPLOYEES(
+        EMPLOYEE_ID INTEGER,
+        FIRST_NAME VARCHAR2(20),
+        LAST_NAME VARCHAR2(25),
+        EMAIL VARCHAR2(25),
+        PHONE_NUMBER VARCHAR2(20),
+        HIRE_DATE DATE,
+        JOB_ID VARCHAR2(10),
+        SALARY NUMERIC(8,2));
+
+CREATE OR REPLACE PROCEDURE
+add_employee(NAME VARCHAR2, SURNAME VARCHAR2, SAL NUMERIC) IS
+BEGIN
+        INSERT INTO employees (FIRST_NAME, LAST_NAME, SALARY)
+        VALUES (NAME, SURNAME, SAL);
+END add_employee;
+/
+
+CALL add_employee('Andrei', 'Soloviev', 120000);
+EXEC add_employee('Sergei', 'Petrov', 133000);
+
+SELECT * FROM EMPLOYEES;
+
+DROP PROCEDURE add_employee;
+DROP TABLE EMPLOYEES;
