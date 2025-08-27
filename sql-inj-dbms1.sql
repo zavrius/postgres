@@ -5,19 +5,18 @@ DROP USER IF EXISTS user1;
 -- 2. Создание базы
 CREATE DATABASE dbms1;
 
--- 2. Создание пользователя и права
+-- 3. Создание пользователя и права
 CREATE USER user1 WITH PASSWORD 'user1';
 GRANT CONNECT ON DATABASE dbms1 TO user1;
--- Права на схему public будут выданы после подключения к базе
 
--- 3. Подключение к базе
+-- 4. Подключение к базе
 \c dbms1
 
 -- Даем права пользователю user1 на схему public
 GRANT USAGE ON SCHEMA public TO user1;
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO user1;
 
--- 4. Таблица людей
+-- 5. Таблица людей
 DROP TABLE IF EXISTS persons;
 CREATE TABLE persons (
     id SERIAL PRIMARY KEY,
@@ -26,14 +25,14 @@ CREATE TABLE persons (
     age INT
 );
 
--- 5. Таблица товаров
+-- 6. Таблица товаров
 DROP TABLE IF EXISTS products;
 CREATE TABLE products (
     id SERIAL PRIMARY KEY,
     product_name VARCHAR(100)
 );
 
--- 6. Таблица заказов
+-- 7. Таблица заказов
 DROP TABLE IF EXISTS orders;
 CREATE TABLE orders (
     id SERIAL PRIMARY KEY,
@@ -41,7 +40,7 @@ CREATE TABLE orders (
     product_id INT REFERENCES products(id)
 );
 
--- 7. Заполнение таблицы persons
+-- 8. Заполнение таблицы persons
 INSERT INTO persons (first_name, last_name, age) VALUES
 ('John', 'Smith', 28),
 ('Emily', 'Johnson', 32),
@@ -54,7 +53,7 @@ INSERT INTO persons (first_name, last_name, age) VALUES
 ('Daniel', 'Thomas', 33),
 ('Sophia', 'Jackson', 27);
 
--- 8. Заполнение таблицы products
+-- 9. Заполнение таблицы products
 INSERT INTO products (product_name) VALUES
 ('Laptop'),
 ('Smartphone'),
@@ -67,7 +66,7 @@ INSERT INTO products (product_name) VALUES
 ('Printer'),
 ('Camera');
 
--- 9. Заполнение таблицы orders
+-- 10. Заполнение таблицы orders
 INSERT INTO orders (person_id, product_id) VALUES
 (1, 1),
 (2, 2),
@@ -80,7 +79,7 @@ INSERT INTO orders (person_id, product_id) VALUES
 (9, 9),
 (10, 10);
 
--- 10. Проверка данных
+-- 11. Проверка данных
 SELECT * FROM persons;
 SELECT * FROM products;
 SELECT * FROM orders;
