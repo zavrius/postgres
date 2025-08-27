@@ -1,5 +1,8 @@
--- 1. Создание базы
+-- 1. Удаляем базу и пользователя, если они существуют
 DROP DATABASE IF EXISTS dbms1;
+DROP USER IF EXISTS user1;
+
+-- 2. Создание базы
 CREATE DATABASE dbms1;
 
 -- 2. Создание пользователя и права
