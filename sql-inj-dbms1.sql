@@ -1,20 +1,18 @@
--- ======================================================
--- Полный скрипт для базы dbms1
--- Создаёт базу, таблицы и заполняет данными
--- ======================================================
-
--- 1. Удаляем базу, если существует
+-- Drop database if exists
 DROP DATABASE IF EXISTS dbms1;
 
--- 2. Создание базы
+-- Create database
 CREATE DATABASE dbms1;
 
--- 3. Подключаемся к базе dbms1
-\c dbms1
+-- Connect to the new database (в интерактивном psql делай так):
+-- \c dbms1
 
--- ======================================================
--- 4. Таблица persons (люди)
+-- Drop tables if they exist
 DROP TABLE IF EXISTS persons;
+DROP TABLE IF EXISTS products;
+DROP TABLE IF EXISTS orders;
+
+-- Create persons table
 CREATE TABLE persons (
     id SERIAL PRIMARY KEY,
     first_name VARCHAR(50),
@@ -22,23 +20,20 @@ CREATE TABLE persons (
     age INT
 );
 
--- 5. Таблица products (товары)
-DROP TABLE IF EXISTS products;
+-- Create products table
 CREATE TABLE products (
     id SERIAL PRIMARY KEY,
     product_name VARCHAR(100)
 );
 
--- 6. Таблица orders (заказы)
-DROP TABLE IF EXISTS orders;
+-- Create orders table
 CREATE TABLE orders (
     id SERIAL PRIMARY KEY,
     person_id INT REFERENCES persons(id),
     product_id INT REFERENCES products(id)
 );
 
--- ======================================================
--- 7. Заполнение таблицы persons
+-- Insert data into persons
 INSERT INTO persons (first_name, last_name, age) VALUES
 ('John', 'Smith', 28),
 ('Emily', 'Johnson', 32),
@@ -51,7 +46,7 @@ INSERT INTO persons (first_name, last_name, age) VALUES
 ('Daniel', 'Thomas', 33),
 ('Sophia', 'Jackson', 27);
 
--- 8. Заполнение таблицы products
+-- Insert data into products
 INSERT INTO products (product_name) VALUES
 ('Laptop'),
 ('Smartphone'),
@@ -64,7 +59,7 @@ INSERT INTO products (product_name) VALUES
 ('Printer'),
 ('Camera');
 
--- 9. Заполнение таблицы orders
+-- Insert data into orders
 INSERT INTO orders (person_id, product_id) VALUES
 (1, 1),
 (2, 2),
@@ -77,7 +72,7 @@ INSERT INTO orders (person_id, product_id) VALUES
 (9, 9),
 (10, 10);
 
--- 10. Проверка данных
+-- Check data
 SELECT * FROM persons;
 SELECT * FROM products;
 SELECT * FROM orders;
